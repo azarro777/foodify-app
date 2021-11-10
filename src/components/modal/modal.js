@@ -1,0 +1,78 @@
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import WithFoodifyApi from '../../components/hoc/with-foodify-api';
+import { addToFavourites } from '../../actions/index';
+import placeholder from './placeholder.png';
+import './modal.scss';
+
+const Modal = ({ active, setActive, addToFavourites }) => {
+  function getRandomId() {
+    return Math.floor(Math.random() * (99999 - 10000) + 10000);
+  }
+
+  const [inputs, setInputs] = useState({});
+
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs((values) => ({
+      ...values,
+      [name]: value,
+      idMeal: getRandomId(),
+      strMealThumb: placeholder
+    }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    addToFavourites(inputs);
+    setActive(false);
+    setInputs({});
+  };
+
+  return (
+    <div
+      className={active ? 'modal active' : 'modal'}
+      onClick={() => {
+        setActive(false);
+      }}
+    >
+      <div
+        className={active ? 'modal__content active' : 'modal__content'}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <form onSubmit={handleSubmit} className='modal__container'>
+          <h3>Add custom dish</h3>
+          <input
+            type='text'
+            placeholder='Dish title'
+            name='strMeal'
+            value={inputs.strMeal || ''}
+            onChange={handleChange}
+          />
+          <textarea
+            placeholder='Dish description'
+            name='strInstructions'
+            value={inputs.strInstructions || ''}
+            onChange={handleChange}
+          ></textarea>
+          <button type='submit'>Add custom dish</button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+const mapStateToProps = (state) => {
+  return {
+    favourites: state.favourites
+  };
+};
+
+const mapDispatchToProps = {
+  addToFavourites
+};
+
+export default WithFoodifyApi()(
+  connect(mapStateToProps, mapDispatchToProps)(Modal)
+);

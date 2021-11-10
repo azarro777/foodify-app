@@ -1,0 +1,97 @@
+@mixin text-style {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+  color: #000000;
+}
+
+.header {
+  background-color: #f2f2f2;
+  max-width: 1440px;
+  height: 60px;
+  display: flex;
+  justify-content: flex-end;
+  justify-content: center;
+  align-items: center;
+  padding: 0 50px;
+}
+
+.header li {
+  list-style: none;
+}
+
+.header__link {
+  @include text-style;
+  text-decoration: none;
+  padding: 0 1.8rem;
+  white-space: nowrap;
+}
+
+.header__link:hover {
+  cursor: pointer;
+  color: rgb(104, 212, 176);
+}
+
+.active a {
+  text-decoration: underline;
+}
+
+.isVisible {
+  display: none;
+}
+
+.button__container {
+  position: relative;
+}
+
+.header__button {
+  position: absolute;
+  left: 230px;
+  top: -20px;
+  width: 192px;
+  height: 38px;
+  background: #c4c4c4;
+  border: none;
+  @include text-style;
+}
+
+.header__button:hover {
+  cursor: pointer;
+  background: #68d4b0;
+}
+
+@media (max-width: 1024px) {
+  .header__button {
+    left: 50px;
+  }
+}
+
+@media (max-width: 414px) {
+  .header__button {
+    left: 0px;
+    width: 50px;
+    overflow: hidden;
+    @include text-style;
+  }
+
+  .header__button::before {
+    content: '+';
+    display: block;
+    width: 100%;
+    height: 50%;
+    left: 100%;
+  }
+}
+
+@media (max-width: 320px) {
+  .header__button {
+    left: 0px;
+  }
+
+  .header__link {
+    padding: 0 0.5rem;
+    white-space: nowrap;
+  }
+}
