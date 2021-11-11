@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './favourite-list-item.module.scss';
 
-const FavouriteListItem = ({ menuItem, refresh, addToFav }) => {
+const FavouriteListItem = ({ menuItem }) => {
   const { strInstructions, strMeal, strMealThumb } = menuItem;
   return (
     <li className={classes.dish__item}>

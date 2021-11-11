@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing <ErrorBoundry/> component ErrorBoundry have rendered correctly 1`] = `ShallowWrapper {}`;
