@@ -8,10 +8,10 @@ export const AppHeader = ({ visible }) => {
 
   return (
     <header className='header'>
-      <Link className='header__link' to='/'>
+      <Link className='header__link' to='/foodify-app'>
         Random dish
       </Link>
-      <Link className='header__link' to='/favourites'>
+      <Link className='header__link' to='/foodify-app/favourites'>
         Favourites
       </Link>
       <div className={visible}>

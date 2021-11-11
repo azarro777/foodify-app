@@ -8,8 +8,8 @@ const App = () => {
   return (
     <div className='app'>
       <Routes>
-        <Route exaxt path='/' element={<MainPage />} />
-        <Route path='favourites' element={<FavouritesPage />} />
+        <Route exaxt path='/foodify-app' element={<MainPage />} />
+        <Route path='/foodify-app/favourites' element={<FavouritesPage />} />
       </Routes>
     </div>
   );
