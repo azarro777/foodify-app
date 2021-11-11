@@ -16,6 +16,7 @@ const RundomList = (props) => {
   useEffect(() => {
     props.menuRequested();
     getData();
+    // eslint-disable-next-line
   }, []);
 
   const addToFav = () => {
