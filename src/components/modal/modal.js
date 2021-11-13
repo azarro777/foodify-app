@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import WithFoodifyApi from '../../components/hoc/with-foodify-api';
 import { addToFavourites } from '../../actions/index';
 import placeholder from './placeholder.png';
 import './modal.scss';
 
-const Modal = ({ active, setActive, addToFavourites }) => {
+const Modal = ({ active, setActive }) => {
   function getRandomId() {
     return Math.floor(Math.random() * (99999 - 10000) + 10000);
   }
@@ -63,16 +61,4 @@ const Modal = ({ active, setActive, addToFavourites }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    favourites: state.favourites
-  };
-};
-
-const mapDispatchToProps = {
-  addToFavourites
-};
-
-export default WithFoodifyApi()(
-  connect(mapStateToProps, mapDispatchToProps)(Modal)
-);
+export default Modal;
