@@ -1,17 +1,17 @@
 import React from 'react';
 import FavouriteListItem from '../favourite-list-item/favourite-list-item';
-import { connect } from 'react-redux';
-import WithFoodifyApi from '../hoc/with-foodify-api';
 import { AppHeader } from '../app-header/app-header';
+import { useSelector } from 'react-redux';
 
-const FavouritesPage = (props) => {
-  const { favourites } = props;
+const FavouritesPage = () => {
+  const favourites = useSelector((state) => state.favourites);
+  const checkFavourites = favourites === undefined ? [] : favourites;
 
   return (
     <>
       <AppHeader visible={'button__container'} />
       <ul className='menu__list'>
-        {favourites.map((menuItem) => {
+        {checkFavourites.map((menuItem) => {
           return (
             <FavouriteListItem menuItem={menuItem} key={menuItem.idMeal} />
           );
@@ -21,10 +21,4 @@ const FavouritesPage = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    favourites: state.favourites
-  };
-};
-
-export default WithFoodifyApi()(connect(mapStateToProps)(FavouritesPage));
+export default FavouritesPage;

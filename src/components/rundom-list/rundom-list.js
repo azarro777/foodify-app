@@ -1,26 +1,30 @@
 import React, { useEffect } from 'react';
 import RundomListItem from '../rundom-list-item/rundom-list-item';
-import { connect } from 'react-redux';
-import WithFoodifyApi from '../hoc/with-foodify-api';
+import { useSelector, useDispatch } from 'react-redux';
+import FoodifyApi from '../../api/foodify-api';
 import { menuLoader, menuRequested, addToFavourites } from '../../actions';
 import Spinner from '../spinner/spinner';
 import './rundom-list.scss';
 
-const RundomList = (props) => {
-  const { FoodifyApi, menuItems, loading } = props;
+const RundomList = () => {
+  const dispatch = useDispatch();
+  const menu = useSelector((state) => state.menu);
+  const menuItems = menu === undefined ? [] : menu;
+
+  const loading = useSelector((state) => state.loading);
 
   const getData = () => {
-    FoodifyApi().then((result) => props.menuLoader(result.meals));
+    FoodifyApi().then((result) => dispatch(menuLoader(result.meals)));
   };
 
   useEffect(() => {
-    props.menuRequested();
+    dispatch(menuRequested());
     getData();
     // eslint-disable-next-line
   }, []);
 
   const addToFav = () => {
-    props.addToFavourites(menuItems);
+    dispatch(addToFavourites(menuItems));
     getData();
   };
 
@@ -43,20 +47,4 @@ const RundomList = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    menuItems: state.menu,
-    favourites: state.favourites,
-    loading: state.loading
-  };
-};
-
-const mapDispatchToProps = {
-  menuLoader,
-  menuRequested,
-  addToFavourites
-};
-
-export default WithFoodifyApi()(
-  connect(mapStateToProps, mapDispatchToProps)(RundomList)
-);
+export default RundomList;

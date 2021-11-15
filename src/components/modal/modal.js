@@ -11,7 +11,6 @@ const Modal = ({ active, setActive }) => {
   }
 
   const [inputs, setInputs] = useState({});
-  console.log('form', inputs.strMeal);
 
   const handleChange = (event) => {
     const name = event.target.name;
