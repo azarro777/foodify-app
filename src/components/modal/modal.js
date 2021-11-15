@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { addToFavourites } from '../../actions/index';
 import placeholder from './placeholder.png';
 import './modal.scss';
 
 const Modal = ({ active, setActive }) => {
+  const dispatch = useDispatch();
   function getRandomId() {
-    return Math.floor(Math.random() * (99999 - 10000) + 10000);
+    return Math.floor(Math.random() * (99999 - 10000) + 10000).toString();
   }
 
   const [inputs, setInputs] = useState({});
+  console.log('form', inputs.strMeal);
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -23,7 +26,7 @@ const Modal = ({ active, setActive }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    addToFavourites(inputs);
+    dispatch(addToFavourites(inputs));
     setActive(false);
     setInputs({});
   };
@@ -54,7 +57,12 @@ const Modal = ({ active, setActive }) => {
             value={inputs.strInstructions || ''}
             onChange={handleChange}
           ></textarea>
-          <button type='submit'>Add custom dish</button>
+          {inputs.strMeal === undefined ||
+          inputs.strInstructions === undefined ? (
+            <p className='empty-recipe'>* You can't add an empty recipe</p>
+          ) : (
+            <button type='submit'>Add custom dish</button>
+          )}
         </form>
       </div>
     </div>

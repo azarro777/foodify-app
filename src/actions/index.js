@@ -17,3 +17,10 @@ export const addToFavourites = (item) => {
     payload: item
   };
 };
+
+export const removeFavourite = (id) => {
+  return {
+    type: 'REMOVE_FAVOURITE',
+    payload: id
+  };
+};

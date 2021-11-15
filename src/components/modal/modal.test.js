@@ -2,6 +2,12 @@ import React from 'react';
 import Modal from './modal';
 import { shallow } from 'enzyme';
 
+const mockDispatch = jest.fn();
+jest.mock('react-redux', () => ({
+  useSelector: jest.fn(),
+  useDispatch: () => mockDispatch
+}));
+
 describe('Testing <Modal/> component', () => {
   const modal = shallow(<Modal />);
   it('Modal have rendered correctly', () => {

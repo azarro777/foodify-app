@@ -7,7 +7,7 @@ const MainPage = () => {
   return (
     <>
       <AppHeader visible={'isVisible'} />
-      <RundomList />;
+      <RundomList />
     </>
   );
 };
